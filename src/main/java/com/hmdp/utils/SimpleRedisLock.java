@@ -15,12 +15,17 @@ public class SimpleRedisLock implements ILock{
     private String name;    //锁的名称(有关业务)
     private static final String KEY_PREFIX = "lock:";
     private static final String ID_PREFIX = UUID.randomUUID().toString(true) + "-";
+    // 定义一个静态常量 UNLOCK_SCRIPT 用于执行 Redis 分布式锁的解锁操作
     private static final DefaultRedisScript<Long> UNLOCK_SCRIPT;
+
     static {
+        // 创建 DefaultRedisScript 实例并设置其脚本资源位置为类路径下的 "unlock.lua" 文件
         UNLOCK_SCRIPT = new DefaultRedisScript<>();
         UNLOCK_SCRIPT.setLocation(new ClassPathResource("unlock.lua"));
+        // 指定执行脚本后返回的结果类型为 Long
         UNLOCK_SCRIPT.setResultType(Long.class);
     }
+
 
     public SimpleRedisLock(String name,StringRedisTemplate stringRedisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
