@@ -75,6 +75,19 @@ class HmDianPingApplicationTests {
     @Test
     void testSaveShop() throws InterruptedException {
         service.saveShop2Redis(1L, 10L);
+        service.saveShop2Redis(2L, 10L);
+        service.saveShop2Redis(3L, 10L);
+        service.saveShop2Redis(4L, 10L);
+        service.saveShop2Redis(5L, 10L);
+        service.saveShop2Redis(6L, 10L);
+        service.saveShop2Redis(7L, 10L);
+        service.saveShop2Redis(8L, 10L);
+        service.saveShop2Redis(9L, 10L);
+        service.saveShop2Redis(10L, 10L);
+        service.saveShop2Redis(11L, 10L);
+        service.saveShop2Redis(12L, 10L);
+        service.saveShop2Redis(13L, 10L);
+        service.saveShop2Redis(14L, 10L);
     }
 
     /**

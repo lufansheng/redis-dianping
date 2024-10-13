@@ -30,8 +30,5 @@ public class VoucherOrderController {
         return voucherOrderService.seckillVoucher(voucherId);
     }
 
-    @GetMapping("/test")
-    public String xx(){
-        return "xxx";
-    }
+
 }
