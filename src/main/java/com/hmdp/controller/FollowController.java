@@ -2,14 +2,16 @@ package com.hmdp.controller;
 
 
 import com.hmdp.dto.Result;
+import com.hmdp.service.IBlogService;
 import com.hmdp.service.IFollowService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 虎哥
@@ -24,28 +26,38 @@ public class FollowController {
 
     /**
      * 关注或取关followUserId这个人
+     *
      * @param followUserId
      * @param isFollow
      * @return
      */
     @PutMapping("/{id}/{isFollow}")
-    public Result follow(@PathVariable("id") Long followUserId,@PathVariable("isFollow") Boolean isFollow){
-        return followService.follow(followUserId,isFollow);
+    public Result follow(@PathVariable("id") Long followUserId, @PathVariable("isFollow") Boolean isFollow) {
+        return followService.follow(followUserId, isFollow);
     }
 
     /**
      * 是否关注followUserId这个人
+     *
      * @param followUserId
      * @return
      */
     @GetMapping("/or/not/{id}")
-    public Result isFollow(@PathVariable("id") Long followUserId){
+    public Result isFollow(@PathVariable("id") Long followUserId) {
         return followService.isFollow(followUserId);
     }
 
     @GetMapping("/common/{id}")
-    public Result followCommons(@PathVariable("id") Long followUserId){
+    public Result followCommons(@PathVariable("id") Long followUserId) {
 
         return followService.followConmons(followUserId);
+    }
+
+    @Autowired
+    private IBlogService blogService;
+    @GetMapping("/of/follow")
+    public Result queryBlogOfFollow(@RequestParam("lastId") Long max,
+                                    @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
+        return blogService.queryBlogOfFollow(max,offset);
     }
 }
