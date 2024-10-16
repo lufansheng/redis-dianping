@@ -99,5 +99,22 @@ public class UserController {
         return Result.ok(user);
     }
 
+    /**
+     * 普通签到
+     * @return
+     */
+    @PostMapping("/sign")
+    public Result sign(){
 
+        return userService.sign();
+    }
+
+    /**
+     * 连续签到天数
+     * @return
+     */
+    @GetMapping("/sign/count")
+    public Result signCount(){
+        return userService.signCount();
+    }
 }

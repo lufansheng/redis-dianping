@@ -268,13 +268,13 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         //4.解析数据:blogId、minTime(时间戳)、offset
         ArrayList<Long> ids = new ArrayList<>(typedTuples.size());
         long minTime = 0;   //2
-        int os = 1;     //2
+        int os = 1;     //返回此次循环中，末尾有多少个重复的数据
         for (ZSetOperations.TypedTuple<String> typedTuple : typedTuples) {
             //5 4 4 2 2
             //4.1获取id
-            ids.add(Long.valueOf(typedTuple.getValue()));
+            ids.add(Long.valueOf(typedTuple.getValue()));   //最后要拿来查询博客列表
             //4.2获取分数(时间戳)
-            long time = typedTuple.getScore().longValue();
+            long time = typedTuple.getScore().longValue();  //每次覆盖，拿到最后一个,就是上一次的最大时间
             if (time == minTime){
                 os++;
             } else {
